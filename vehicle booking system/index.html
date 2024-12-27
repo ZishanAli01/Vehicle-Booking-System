@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Booking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://wallpapers.com/images/hd/black-car-4k-8iilwvng2997orpp.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+        header {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .booking-list {
+            margin-top: 20px;
+        }
+        .booking-item {
+            padding: 10px;
+            background: #f9f9f9;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Vehicle Booking System</h1>
+    </header>
+    <div class="container">
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="contactNumber">Contact Number</label>
+                <input type="tel" id="contactNumber" placeholder="Enter your contact number" required>
+            </div>
+            <div class="form-group">
+                <label for="departureCity">Departure City</label>
+                <input type="text" id="departureCity" placeholder="Enter your departure city" required>
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <input type="text" id="destination" placeholder="Enter your destination" required>
+            </div>
+            <div class="form-group">
+                <label for="vehicleType">Vehicle Type</label>
+                <select id="vehicleType" required>
+                    <option value="">Select a vehicle</option>
+                    <option value="Car">Car</option>
+                    <option value="Bike">Bike</option>
+                    <option value="Truck">Truck</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pickupDate">Pickup Date</label>
+                <input type="date" id="pickupDate" required>
+            </div>
+            <div class="form-group">
+                <label for="returnDate">Return Date</label>
+                <input type="date" id="returnDate" required>
+            </div>
+            <button type="submit">Book Vehicle</button>
+        </form>
+
+        <div class="booking-list" id="bookingList">
+            <h3>Your Bookings</h3>
+            <!-- Booking items will appear here -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const contactNumber = document.getElementById('contactNumber').value;
+            const departureCity = document.getElementById('departureCity').value;
+            const destination = document.getElementById('destination').value;
+            const vehicleType = document.getElementById('vehicleType').value;
+            const pickupDate = document.getElementById('pickupDate').value;
+            const returnDate = document.getElementById('returnDate').value;
+
+            if (!name || !contactNumber || !departureCity || !destination || !vehicleType || !pickupDate || !returnDate) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            const bookingList = document.getElementById('bookingList');
+            const bookingItem = document.createElement('div');
+            bookingItem.classList.add('booking-item');
+
+            bookingItem.innerHTML = `
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Contact Number:</strong> ${contactNumber}</p>
+                <p><strong>Departure City:</strong> ${departureCity}</p>
+                <p><strong>Destination:</strong> ${destination}</p>
+                <p><strong>Vehicle:</strong> ${vehicleType}</p>
+                <p><strong>Pickup Date:</strong> ${pickupDate}</p>
+                <p><strong>Return Date:</strong> ${returnDate}</p>
+            `;
+
+            bookingList.appendChild(bookingItem);
+
+            document.getElementById('bookingForm').reset();
+        });
+    </script>
+</body>
+</html>
